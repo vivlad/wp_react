@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import Header from '../../components/Header';
 import HomePostItem from '../../components/HomePostItem';
@@ -55,13 +56,14 @@ class Home extends Component {
         return(
             <div>
                 <Header />
-                <section>
+                <section className="postsContainer">
                     { this.props.posts &&
                         this.props.posts.map( ( item, idx ) => {
                             const featuredImageUrl = item.featImage ? item.featImage.media_details.sizes.thumbnail.source_url : '';
                             return (
                                 <HomePostItem
                                 key={idx}
+                                postid={item.id}
                                 title={item.title.rendered}
                                 excerpt={item.excerpt.rendered}
                                 featuredMedia={featuredImageUrl}
@@ -85,4 +87,4 @@ const mapStateToProps = state => ({
     baseURL: state.homeReducers.baseURL,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home));
