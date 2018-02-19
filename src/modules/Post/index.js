@@ -61,7 +61,6 @@ class Post extends Component {
 
 const mapDispatchToProps = dispatch => ({
     loadPosts: payload => dispatch( homeActions.loadPosts(payload) ),
-    //loadImages: (idxOfPost, imageData) => dispatch( homeActions.loadImages(idxOfPost, imageData) ),
 });
 
 const mapStateToProps = state => ({

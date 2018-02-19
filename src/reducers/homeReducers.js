@@ -1,9 +1,10 @@
 import * as homeTypes from '../types/homeTypes';
+import * as config from '../utils/config';
 
 const initionalState = {
     postsIsLoaded: false,
     posts: [],
-    baseURL: 'http://bumburmyaka.esy.es/wp-json/wp/v2',
+    baseURL: config.baseURL,
 }
 
 export const homeReducer = ( state = initionalState, action ) => {
@@ -14,18 +15,6 @@ export const homeReducer = ( state = initionalState, action ) => {
                 posts: action.posts,
                 postsIsLoaded: true,
             }
-        case homeTypes.LOAD_IMAGES:
-            return {
-                ...state,
-                posts: state.posts.map(
-                    (item, idx) => ( 
-                        action.id === idx ? 
-                        {...item, featImage: action.imageData} 
-                        : 
-                        item
-                    )
-                )
-            };
         default: return state;
     }
 }
