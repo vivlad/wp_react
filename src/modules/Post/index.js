@@ -3,8 +3,10 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import renderHTML from 'react-render-html';
 
+import ShortcodeParser from '../../utils/shortcodes';
 import Header from '../../components/Header';
 import * as homeActions from '../../actions/homeActions';
+import './post.css';
 
 class Post extends Component {
 
@@ -43,12 +45,15 @@ class Post extends Component {
         if( postsArray.length > 0 ) {
             const postData = postsArray.filter( post => parseInt(post.id) === parseInt(postID) );
             postContent = postData[0].content.rendered;
+            postContent = ShortcodeParser( postContent );
         }
-        
+       
         return (
             <div>
                 <Header />
-                {renderHTML(postContent)}
+                <div className="postContent">
+                    {renderHTML(postContent)}
+                </div>
             </div>
         );
     }
