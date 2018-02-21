@@ -24,7 +24,7 @@ export const loadPosts = ( payload ) => dispatch => {
 
 export const loadSinglePost = ( id ) => dispatch => {
   const fetchSinglePostStarted = () => ({ type: postsTypes.FETCH_SINGLE_POST_STARTED });
-  const fetchSinglePostError = () => ({ type: postsTypes.FETCH_SINGLE_POST_ERROR });
+  const fetchSinglePostError = (err) => ({ type: postsTypes.FETCH_SINGLE_POST_ERROR, err });
 
   const baseURL = config.baseURL;
   const endpoint = `/posts/${id}`; 
@@ -35,7 +35,10 @@ export const loadSinglePost = ( id ) => dispatch => {
   fetch( baseURL + endpoint, requestParams )
     .then( data => data.json() )
     .then( payload => {
-      dispatch(loadPosts( [payload] ));
+      dispatch({
+        type: postsTypes.FETCH_SINGLE_POST_SUCESS,
+        post: payload,
+      });
     })
-    .catch( dispatch(fetchSinglePostError()) );
+    .catch( err =>  dispatch(fetchSinglePostError(err)) );
 }
