@@ -17,11 +17,15 @@ class Post extends Component {
     render(){
         let postContent = 'Loading...';
 
+        if( ! this.props.message ) {
+          postContent = 'Post not found';
+        }
+
         if( this.props.singleError ) {
           postContent = 'Something wrong with API. Try to reload page';
         }
 
-        if( null !== this.props.post  ) {
+        if( null !== this.props.post && this.props.post.content ) {
             postContent = this.props.post.content.rendered;
             postContent = ShortcodeParser( postContent );
         }
