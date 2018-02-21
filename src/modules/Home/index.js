@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import Header from '../../components/Header';
 import HomePostItem from '../../components/HomePostItem';
 import '../../App.css';
-import * as homeActions from '../../actions/homeActions';
+import * as postsActions from '../../actions/postsActions';
 
 class Home extends Component {
 
@@ -42,12 +42,12 @@ class Home extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    loadPosts: () => dispatch( homeActions.loadPosts() ),
+    loadPosts: () => dispatch( postsActions.loadPosts() ),
 });
 
 const mapStateToProps = state => ({
-    posts: state.homeReducers.posts,
-    baseURL: state.homeReducers.baseURL,
+    posts: state.postReducers.posts,
+    baseURL: state.postReducers.baseURL,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home));

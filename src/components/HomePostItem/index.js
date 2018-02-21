@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import renderHTML from 'react-render-html';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import * as config from '../../utils/config';
 
 
 
@@ -16,7 +16,7 @@ class Header extends Component {
     }
 
     getFeaturedImageURL = ( mediaId, size ) => {
-        const baseURL = this.props.baseURL;
+        const baseURL = config.baseURL;
         const endpoint = `/media/${mediaId}`;
         const header = new Headers({
             'Access-Control-Allow-Origin':'*',
@@ -57,10 +57,4 @@ class Header extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    baseURL: state.homeReducers.baseURL,
-});
-
-const mapDispatchToProps = dispatch => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;
